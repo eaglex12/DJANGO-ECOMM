@@ -141,8 +141,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'divyanshsrathore13@gmail.com'
-EMAIL_HOST_PASSWORD = 'qqsh mgsi swmk iucw'
+EMAIL_HOST_PASSWORD = 'your email host passw word'
 
-KEY='rzp_test_76b16nKIDZUaP9'
-SECRET='b4LesZyQ6HOE1ayLqn8L1X1s'
+KEY='razor pay key'
+SECRET='razor pay secret '
 
