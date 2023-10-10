@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+{% if messages %}
+{% for message in messages%}
+<p {%if message.tags%} class="alert alert-{{message.tags}} mb-5" {%endif%}> {{message}} </p>
+{% endfor %}{% endif %}
+
+
+
+
+<section style="background-color: #000;">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col">
+          <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+            <ol class="breadcrumb mb-0">
+              <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{% url 'cart' %}">Cart</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+      <div class="col flex justify-content-center">
+      <div class="col-md-12 justify-content-center">
+        <div class="card mb-4">
+          <div class="card-header py-3">
+            <h5 class="mb-0">Delivery Details</h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush mb-2">
+            {% for key,value in details.items %}
+              <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0 text-uppercase">
+                {{key}}
+                <span>{{value}}</span>
+              </li>
+              {% endfor %}
+            </ul>
+
+            {% if details %}
+            <a href="{% url 'editprofile' %}"
+            <button type="button" class="btn btn-dark btn-lg btn-block">
+              Edit Details
+            </button>
+            </a>
+            {% else %}
+            <a href="{% url 'addprofile' %}"
+            <button type="button" class="btn btn-dark btn-lg btn-block">
+              Add Details
+            </button>
+            </a>
+            {% endif %}
+          </a>
+          </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col justify-content-center"
+      <div class="col-md-8 justify-content-center">
+        <div class="card mb-8">
+          <div class="card-header py-3">
+            <h5 class="mb-0">Summary</h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                Products
+                <span>Rs {{total_price}}</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                Shipping
+                <span>Rs {{shipping}}</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                <div>
+                  <strong>Total amount</strong>
+                  <strong>
+                    <p class="mb-0">(including GST)</p>
+                  </strong>
+                </div>
+                <span><strong>Rs {{total_amount}}</strong></span>
+              </li>
+            </ul>
+            <a href="{% url 'checkout' %}">
+            <button id="rzp-button1" class="btn btn-dark btn-lg btn-block">
+              Proceed To Payment
+            </button>
+          </a>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+    var options = {
+        "key": "rzp_test_76b16nKIDZUaP9", // Replace with your actual Razorpay Key ID
+        "amount": "{{ total_amount }}00", // Amount should be in paise
+        "currency": "INR",
+        "name": "E-commerce by Divyansh Singh Rathore",
+        "description": "Purchasing",
+        "image": "https://example.com/your_logo",
+        "order_id": "{{ payment.id }}",
+        "handler": function (response){
+          window.location.href=`http://127.0.0.1:8000/success/?razorpay_payment_id=${response.razorpay_payment_id}&razorpay_order_id=${response.razorpay_order_id}&razorpay_signature=${response.razorpay_signature}`;
+        },
+        "prefill": {
+            "name": "Divyansh Singh Rathore",
+            "email": "20cs3027@rgipt.ac.in",
+            "contact": "8400383514"
+        },
+        "notes": {
+            "address": "Divyansh Corporate Office"
+        },
+        "theme": {
+            "color": "#3399cc"
+        }
+    };
+
+    var rzp1 = new Razorpay(options);
+
+    rzp1.on('payment.failed', function (response){
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+    });
+
+    document.getElementById('rzp-button1').onclick = function(e){
+        rzp1.open();
+        e.preventDefault();
+    }
+</script>
+
+
+
+
+{% endblock main %}

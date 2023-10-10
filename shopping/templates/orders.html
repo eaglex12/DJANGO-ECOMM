@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Details</title>
+    <style>
+        .order-details {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Order Details</h1>
+
+{% for order in orders %}
+    <div class="order-details">
+        <strong>Order ID:</strong> {{ order.order_id }} <br>
+        <strong>Cart ID:</strong> {{ order.cart_id }} <br>
+        <strong>Billing Detail:</strong> {{ order.billing_detail }} <br>
+        <strong>Order Date:</strong> {{ order.order_date }} <br>
+        <strong>Payment Status:</strong> {{ order.payment_status }} <br>
+        <strong>Shipping Initiated:</strong> {{ order.shipping_initiated }} <br>
+        <strong>Shipped:</strong> {{ order.shipped }} <br>
+        <strong>Razorpay Order ID:</strong> {{ order.razor_pay_order_id }} <br>
+        <strong>Razorpay Payment ID:</strong> {{ order.razor_pay_payment_id }} <br>
+        <strong>Razorpay Signature ID:</strong> {{ order.razor_pay_signature_id }} <br>
+        <strong>Total Amount Paid:</strong> Rs. {{ order.total_amount_paid }} <br>
+
+
+
+    </div>
+{% endfor %}
+
+</body>
+</html>

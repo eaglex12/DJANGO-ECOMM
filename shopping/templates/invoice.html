@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .invoice-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .address-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .billing-address, .company-address {
+            width: 48%;
+            border: 1px solid #dddddd;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .additional-content {
+            margin-top: 30px;
+        }
+        .additional-content p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-header">
+        <h1>Invoice Details</h1>
+    </div>
+
+    <div class="address-container">
+
+    <div class="billing-address">
+        <h2>Billing Address</h2>
+        <p>Name: {{ payment_details.billing_name }}</p>
+        <p>Email: {{ payment_details.billing_email }}</p>
+        <p>Address: {{ payment_details.billing_address }}</p>
+        <p>City: {{ payment_details.billing_city }}</p>
+        <p>State: {{ payment_details.billing_state }}</p>
+        <p>Pin: {{ payment_details.billing_pin }}</p>
+        <p>Phone: {{ payment_details.billing_phone }}</p>
+    </div>
+    
+    <!-- Add Company Address -->
+    <div class="company-address">
+        <h2>Company Address</h2>
+        <p>Divyansh Corporate Office</p>
+        <p>Near Pancharg</p>
+        <p>City: Sahibganj</p>
+        <p>State: Jharkhand</p>
+        <p>Pin: 816109</p>
+        <p>Phone: 8400383514</p>
+    </div>
+
+</div>
+    
+
+    <table>
+        <tr>
+            <th>Attribute</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>Order ID</td>
+            <td>{{ payment_details.order_id }}</td>
+        </tr>
+        <tr>
+            <td>Payment ID</td>
+            <td>{{ payment_details.payment_id }}</td>
+        </tr>
+        <tr>
+            <td>Signature</td>
+            <td>{{ payment_details.signature }}</td>
+        </tr>
+        <tr>
+            <td>Amount</td>
+            <td>{{ payment_details.amount }}</td>
+        </tr>
+        <tr>
+            <td>Currency</td>
+            <td>{{ payment_details.currency }}</td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td>{{ payment_details.status }}</td>
+        </tr>
+        <tr>
+            <td>Payment Method</td>
+            <td>{{ payment_details.method }}</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>{{ payment_details.email }}</td>
+        </tr>
+        
+
+        <!-- Add more rows for additional details -->
+    </table>
+
+    <div class="additional-content">
+        <h2>Additional Content</h2>
+        <p>Thank you for shopping with us! We appreciate your business and look forward to serving you again.</p>
+        <!-- Add more content as needed -->
+    </div>
+
+</body>
+</html>
